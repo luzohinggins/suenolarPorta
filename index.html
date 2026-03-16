@@ -1,0 +1,1984 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onboarding Sueñolar | Porta Solutions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* ================================================================ 
+           COLORES Y VARIABLES GLOBALES 
+           ================================================================ */
+        :root {
+            --lila-principal: #522883;
+            --purpura-medio: #72298d;
+            --purpura-oscuro: #3d1a52;
+            --naranja-base: #ee7b1c;
+            --naranja-rosado: #ed631d;
+            --beige-claro: #fdf1e9;
+            --texto-principal: #222222;
+            --texto-secundario: #6b6b6b;
+            --verde-check: #10B981;
+            --amber-400: #FBBF24;
+            --amber-500: #F59E0B;
+        }
+
+        /* ================================================================ 
+           RESET Y ESTILOS GLOBALES 
+           ================================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html, body {
+            height: 100%;
+            background-color: #ffffff;
+            color: var(--texto-principal);
+            line-height: 1.6;
+            overflow: hidden;
+        }
+
+        /* ================================================================ 
+           CONTENEDOR PRINCIPAL Y PAGINACIÓN 
+           ================================================================ */
+        .documento {
+            width: 100%;
+            background-color: #ffffff;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            display: none;
+            flex-direction: column;
+            overflow-y: auto;
+            background: white;
+            page-break-after: always;
+            opacity: 0;
+        }
+
+        /* ================================================================ 
+           HEADER Y FOOTER COMPARTIDOS 
+           ================================================================ */
+        .slide-header {
+            background: linear-gradient(135deg, var(--purpura-oscuro) 0%, var(--lila-principal) 55%, var(--purpura-medio) 100%);
+            padding: 16px 55px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 70px;
+            flex-shrink: 0;
+        }
+
+        .slide-header-left {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .porta-logo-small {
+            height: 40px;
+            background: white;
+            padding: 6px 13px;
+            border-radius: 10px;
+            font-weight: 700;
+            color: var(--lila-principal);
+            font-size: 0.65em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide-header-text {
+            color: white;
+            font-size: 0.82em;
+            font-weight: 500;
+        }
+
+        .slide-number {
+            color: var(--naranja-base);
+            font-weight: 700;
+            font-size: 1em;
+        }
+
+        .slide-footer {
+            background: var(--beige-claro);
+            padding: 9px 55px;
+            border-top: 3px solid var(--naranja-base);
+            font-size: 0.7em;
+            color: var(--texto-secundario);
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        /* ================================================================ 
+           CONTENIDO PRINCIPAL 
+           ================================================================ */
+        .slide-content {
+            flex: 1;
+            padding: 30px 60px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* ================================================================ 
+           TÍTULOS Y SUBTÍTULOS 
+           ================================================================ */
+        .slide-title {
+            background: linear-gradient(135deg, var(--lila-principal) 0%, var(--purpura-medio) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.75em;
+            font-weight: 700;
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 4px solid var(--naranja-base);
+        }
+
+        .slide-subtitle {
+            font-size: 0.8em;
+            color: var(--texto-secundario);
+            margin-bottom: 12px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        /* ================================================================ 
+           COVER / HERO SLIDES 
+           ================================================================ */
+        .cover-slide {
+            background: linear-gradient(135deg, #1c0730 0%, var(--purpura-oscuro) 25%, var(--lila-principal) 55%, var(--purpura-medio) 80%, #9b3fb8 100%) !important;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .cover-slide::before {
+            content: none !important;
+        }
+
+        .cover-slide .slide-header {
+            display: none !important;
+        }
+
+        .cover-slide .slide-footer {
+            display: none !important;
+        }
+
+        .cover-content {
+            color: white;
+            padding: 50px 80px;
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+        }
+
+        .cover-logo {
+            height: 72px;
+            background: white;
+            padding: 12px 26px;
+            border-radius: 16px;
+            margin: 0 auto 28px;
+            font-weight: 700;
+            color: var(--lila-principal);
+            font-size: 0.8em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .cover-title {
+            font-size: 2.6em;
+            font-weight: 900;
+            color: white;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+            margin-bottom: 14px;
+        }
+
+        .cover-subtitle {
+            font-size: 1.05em;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.88);
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .cover-badge {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            padding: 7px 20px;
+            border-radius: 30px;
+            font-size: 0.82em;
+            color: white;
+            font-weight: 500;
+            display: inline-block;
+        }
+
+        .amber-badge {
+            background: linear-gradient(135deg, var(--amber-400), var(--amber-500));
+            color: #78350F;
+            padding: 7px 24px;
+            border-radius: 30px;
+            font-size: 0.75em;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            display: inline-block;
+            text-transform: uppercase;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* ================================================================ 
+           DECORATIVOS SVG 
+           ================================================================ */
+        .hero-decor {
+            position: absolute;
+            opacity: 0.12;
+            pointer-events: none;
+        }
+
+        /* ================================================================ 
+           GRIDS Y LAYOUTS 
+           ================================================================ */
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .three-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 14px;
+        }
+
+        /* ================================================================ 
+           ITEMS CON CHECK 
+           ================================================================ */
+        .comparison-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin-bottom: 6px;
+            font-size: 0.78em;
+            line-height: 1.45;
+        }
+
+        .check {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.65em;
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+
+        .check.purple {
+            background: rgba(82, 40, 131, 0.12);
+            color: var(--lila-principal);
+        }
+
+        .check.orange {
+            background: rgba(238, 123, 28, 0.12);
+            color: var(--naranja-base);
+        }
+
+        /* ================================================================ 
+           HIGHLIGHT BOXES Y RECUADROS 
+           ================================================================ */
+        .highlight-box {
+            background: linear-gradient(135deg, var(--lila-principal), var(--purpura-medio));
+            color: white;
+            padding: 15px 20px;
+            border-radius: 12px;
+            text-align: center;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .highlight-box h3 {
+            font-size: 0.95em;
+            margin-bottom: 5px;
+        }
+
+        .highlight-box p {
+            font-size: 0.8em;
+            opacity: 0.95;
+            margin: 0;
+        }
+
+        .feature-module {
+            background: linear-gradient(135deg, rgba(82, 40, 131, 0.05) 0%, rgba(238, 123, 28, 0.04) 100%);
+            border-left: 4px solid var(--lila-principal);
+            padding: 16px 18px;
+            border-radius: 8px;
+        }
+
+        .feature-module h4 {
+            color: var(--lila-principal);
+            font-size: 1.15em;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .feature-module p {
+            font-size: 1.02em;
+            line-height: 1.4;
+            color: var(--texto-secundario);
+            margin: 0;
+        }
+
+        .module-badge {
+            background: var(--lila-principal);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.7em;
+            font-weight: 600;
+        }
+
+        /* ================================================================ 
+           LISTAS 
+           ================================================================ */
+        .lista-items {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .lista-items li {
+            font-size: 1.2em;
+            color: var(--texto-principal);
+            margin-bottom: 20px;
+            padding-left: 36px;
+            position: relative;
+            line-height: 1.65;
+        }
+
+        .lista-items li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--naranja-base);
+            font-size: 20px;
+            line-height: 1.4;
+        }
+
+        /* ================================================================ 
+           TABLAS 
+           ================================================================ */
+        .tabla-container {
+            position: relative;
+            z-index: 1;
+            overflow-x: auto;
+            margin-top: 12px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            font-size: 1.0em;
+        }
+
+        table th {
+            background-color: var(--lila-principal);
+            color: #ffffff;
+            padding: 12px 14px;
+            text-align: left;
+            font-weight: 600;
+            border: 1px solid var(--lila-principal);
+        }
+
+        table td {
+            padding: 12px 14px;
+            border: 1px solid #e0e0e0;
+            color: var(--texto-principal);
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f8f5ff;
+        }
+
+        /* ================================================================ 
+           TEXTOS DESTACADOS 
+           ================================================================ */
+        .morado {
+            color: var(--lila-principal);
+            font-weight: 600;
+        }
+
+        .destacado {
+            color: var(--naranja-base);
+            font-weight: 600;
+        }
+
+        /* ================================================================ 
+           RESPONSIVE 
+           ================================================================ */
+        @media (max-width: 768px) {
+            .slide {
+                height: auto;
+                min-height: 100vh;
+            }
+
+            .slide-content {
+                padding: 20px 30px;
+            }
+
+            .slide-title {
+                font-size: 1.4em;
+            }
+
+            .cover-title {
+                font-size: 1.8em;
+            }
+
+            .two-columns, .three-columns {
+                grid-template-columns: 1fr;
+            }
+
+            table {
+                font-size: 0.65em;
+            }
+        }
+
+        /* ================================================================ 
+           EFECTOS HOVER Y DINAMISMO 
+           ================================================================ */
+
+        /* ANIMACIONES GLOBALES */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes scaleUp {
+            from {
+                transform: scale(0.95);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* SLIDE CONTENT - Entrada suave */
+        .slide-content {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        /* TÍTULOS - Animación */
+        .slide-title {
+            animation: slideInLeft 0.7s ease-out 0.1s forwards;
+            opacity: 0;
+        }
+
+        /* CARDS Y MÓDULOS - Hover */
+        .feature-module {
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .feature-module:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(82, 40, 131, 0.15);
+            border-left-color: var(--naranja-base);
+        }
+
+        .feature-module:hover h4 {
+            color: var(--naranja-base);
+        }
+
+        /* HIGHLIGHT BOX - Animación */
+        .highlight-box {
+            transition: all 0.3s ease;
+            animation: scaleUp 0.6s ease-out 0.2s forwards;
+            opacity: 0;
+        }
+
+        .highlight-box:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 30px rgba(82, 40, 131, 0.25);
+        }
+
+        /* LISTA ITEMS - Efecto cascada */
+        .lista-items li {
+            animation: fadeInUp 0.5s ease-out backwards;
+        }
+
+        .lista-items li:nth-child(1) { animation-delay: 0.1s; }
+        .lista-items li:nth-child(2) { animation-delay: 0.2s; }
+        .lista-items li:nth-child(3) { animation-delay: 0.3s; }
+        .lista-items li:nth-child(4) { animation-delay: 0.4s; }
+        .lista-items li:nth-child(5) { animation-delay: 0.5s; }
+        .lista-items li:nth-child(6) { animation-delay: 0.6s; }
+
+        .lista-items li:hover {
+            padding-left: 36px;
+            transition: padding-left 0.2s ease;
+        }
+
+        .lista-items li:hover::before {
+            color: var(--lila-principal);
+            font-size: 22px;
+            transition: all 0.2s ease;
+        }
+
+        /* COMPARISON ITEMS - Hover interactivo */
+        .comparison-item {
+            transition: all 0.2s ease;
+        }
+
+        .comparison-item:hover {
+            padding-left: 4px;
+        }
+
+        .comparison-item:hover .check {
+            transform: scale(1.15);
+            transition: transform 0.2s ease;
+        }
+
+        /* CHECK CIRCLES - Animación de pulso */
+        .check {
+            transition: all 0.3s ease;
+        }
+
+        .comparison-item:hover .check {
+            animation: pulse 0.6s ease-in-out;
+        }
+
+        /* FOTO CIRCULAR - Hover efecto */
+        [style*="border-radius:50%"] {
+            transition: all 0.4s ease;
+        }
+
+        .slide:hover [style*="border-radius:50%"] {
+            transform: scale(1.05) rotateY(2deg);
+            filter: brightness(1.1);
+        }
+
+        /* BADGES - Animación de entrada */
+        .amber-badge {
+            animation: scaleUp 0.5s ease-out 0.3s forwards;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .cover-badge {
+            animation: slideInLeft 0.6s ease-out 0.4s forwards;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .amber-badge:hover,
+        .cover-badge:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+
+        /* TABLA - Hover en filas */
+        table {
+            transition: all 0.3s ease;
+        }
+
+        table td {
+            transition: all 0.2s ease;
+        }
+
+        table tr:hover td {
+            background-color: rgba(82, 40, 131, 0.08);
+            padding: 13px 14px;
+        }
+
+        table tr:hover {
+            box-shadow: inset 0 0 10px rgba(82, 40, 131, 0.1);
+        }
+
+        /* HEADERS - Efecto sutil */
+        .slide-header {
+            transition: all 0.4s ease;
+            animation: slideInLeft 0.6s ease-out backwards;
+        }
+
+        /* FOOTERS - Entrada suave */
+        .slide-footer {
+            animation: fadeInUp 0.7s ease-out 0.2s forwards;
+            opacity: 0;
+        }
+
+        /* DOS COLUMNAS - Efecto stagger */
+        .two-columns > div {
+            animation: fadeInUp 0.6s ease-out backwards;
+        }
+
+        .two-columns > div:nth-child(1) { animation-delay: 0.2s; }
+        .two-columns > div:nth-child(2) { animation-delay: 0.3s; }
+
+        .two-columns > div:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        /* COVER CONTENT - Animación suave */
+        .cover-content {
+            animation: fadeInUp 0.8s ease-out;
+            opacity: 0;
+        }
+
+        .cover-content {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .cover-title {
+            animation: slideInLeft 0.7s ease-out 0.2s forwards;
+            opacity: 0;
+        }
+
+        .cover-subtitle {
+            animation: fadeInUp 0.6s ease-out 0.3s forwards;
+            opacity: 0;
+        }
+
+        /* DECORATIVOS SVG - Animación sutil */
+        .hero-decor {
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        /* TRANSICIÓN GENERAL SUAVE */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        /* EFECTO GLOW EN HOVER */
+        .feature-module:hover,
+        .highlight-box:hover {
+            filter: drop-shadow(0 0 8px rgba(238, 123, 28, 0.3));
+        }
+
+        /* PHOTO HOVER - Efecto especial */
+        img[alt="Luz Ohinggins"] {
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .slide:hover img[alt="Luz Ohinggins"] {
+            filter: brightness(1.1) contrast(1.05);
+            transform: scale(1.05);
+        }
+
+        /* PORTA LOGO - Efecto hover */
+        .porta-logo-small {
+            transition: all 0.3s ease;
+        }
+
+        .slide-header:hover .porta-logo-small {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* ================================================================ 
+           ESTILOS DE IMPRESIÓN Y PDF 
+           ================================================================ */
+        /* ================================================================ 
+           RESPONSIVE DESIGN - TABLETS (max-width: 1024px)
+           ================================================================ */
+        @media screen and (max-width: 1024px) {
+            .slide {
+                height: 100vh;
+                padding: 40px 30px;
+            }
+
+            .slide-header {
+                padding: 14px 30px;
+                margin-bottom: 15px;
+            }
+
+            .slide-header-text {
+                font-size: 0.85em;
+            }
+
+            .slide-content {
+                padding: 15px 30px;
+            }
+
+            .slide-title {
+                font-size: 1.5em;
+                margin-bottom: 10px;
+            }
+
+            .slide-subtitle {
+                font-size: 0.82em;
+                margin-bottom: 12px;
+            }
+
+            .cover-title {
+                font-size: 1.8em;
+            }
+
+            .two-columns {
+                gap: 10px;
+            }
+
+            .comparison-item span {
+                font-size: 0.82em !important;
+            }
+
+            .timeline-phases {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            #btn-prev, #btn-next {
+                width: 38px;
+                height: 38px;
+                font-size: 16px;
+            }
+        }
+
+        /* ================================================================ 
+           RESPONSIVE DESIGN - TELÉFONOS (max-width: 768px)
+           ================================================================ */
+        @media screen and (max-width: 768px) {
+            html, body {
+                font-size: 14px;
+            }
+
+            .slide {
+                height: 100vh;
+                padding: 30px 15px;
+                overflow-y: auto;
+            }
+
+            .slide-header {
+                padding: 12px 15px;
+                margin-bottom: 12px;
+                flex-direction: column;
+                gap: 8px;
+                min-height: auto;
+            }
+
+            .slide-header-left {
+                flex-direction: column;
+                gap: 6px;
+                align-items: center;
+            }
+
+            .porta-logo-small {
+                height: 28px !important;
+            }
+
+            .slide-header-text {
+                font-size: 0.75em;
+                text-align: center;
+            }
+
+            .slide-number {
+                font-size: 0.85em;
+            }
+
+            .slide-content {
+                padding: 12px 15px;
+            }
+
+            .slide-title {
+                font-size: 1.2em;
+                margin-bottom: 8px;
+            }
+
+            .slide-subtitle {
+                font-size: 0.75em;
+                margin-bottom: 10px;
+            }
+
+            .slide-footer {
+                font-size: 0.65em;
+                padding: 8px 12px;
+            }
+
+            /* Cover adjustments */
+            .cover-logo {
+                height: 60px;
+                width: auto;
+            }
+
+            .cover-title {
+                font-size: 1.2em;
+                line-height: 1.3;
+            }
+
+            .cover-subtitle {
+                font-size: 0.8em;
+            }
+
+            .amber-badge {
+                padding: 6px 12px;
+                font-size: 0.7em;
+            }
+
+            /* Two columns stack */
+            .two-columns {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .comparison-item {
+                padding: 6px;
+            }
+
+            .comparison-item span {
+                font-size: 0.8em !important;
+            }
+
+            .check {
+                min-width: 18px;
+                width: 18px;
+                height: 18px;
+                font-size: 0.7em;
+            }
+
+            /* Timeline vertical */
+            .timeline-phases {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .timeline-line {
+                display: none;
+            }
+
+            .timeline-circle {
+                width: 45px;
+                height: 45px;
+                font-size: 1em;
+            }
+
+            .timeline-title {
+                font-size: 0.85em;
+            }
+
+            .timeline-description {
+                font-size: 0.75em;
+            }
+
+            /* Highlight boxes */
+            .highlight-box {
+                padding: 20px 15px !important;
+            }
+
+            .highlight-box h3 {
+                font-size: 1em !important;
+            }
+
+            .highlight-box p {
+                font-size: 0.9em !important;
+                line-height: 1.6 !important;
+            }
+
+            /* Lists */
+            .lista-items {
+                font-size: 0.75em !important;
+                padding-left: 15px;
+            }
+
+            .lista-items li {
+                margin-bottom: 8px;
+            }
+
+            /* Feature modules */
+            .feature-module {
+                padding: 12px 12px;
+            }
+
+            .feature-module h3 {
+                font-size: 0.85em;
+                margin-bottom: 8px;
+            }
+
+            /* Navigation buttons */
+            #btn-prev, #btn-next {
+                width: 32px;
+                height: 32px;
+                font-size: 14px;
+                bottom: 15px;
+            }
+
+            #btn-prev {
+                left: 10px;
+            }
+
+            #btn-next {
+                right: 10px;
+            }
+
+            #slide-counter-display {
+                font-size: 0.7em;
+                padding: 4px 6px;
+                bottom: 15px;
+            }
+
+            /* Decoratives reduced */
+            .hero-decor {
+                opacity: 0.5 !important;
+            }
+
+            /* Flex layout for profile - stack on mobile */
+            [style*="display:flex;gap:26px"] {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            [style*="flex:0 0 220px"] {
+                flex: 1;
+                width: 100%;
+                max-width: 220px;
+            }
+        }
+
+        /* ================================================================ 
+           RESPONSIVE DESIGN - TELÉFONOS PEQUEÑOS (max-width: 480px)
+           ================================================================ */
+        @media screen and (max-width: 480px) {
+            html, body {
+                font-size: 12px;
+            }
+
+            .slide {
+                padding: 25px 10px;
+                height: auto;
+                min-height: 100vh;
+            }
+
+            .slide-header {
+                padding: 10px 10px;
+                margin-bottom: 10px;
+                gap: 6px;
+            }
+
+            .slide-header-left {
+                gap: 4px;
+            }
+
+            .porta-logo-small {
+                height: 24px !important;
+            }
+
+            .slide-header-text {
+                font-size: 0.7em;
+            }
+
+            .slide-title {
+                font-size: 1.05em;
+                margin-bottom: 6px;
+            }
+
+            .slide-subtitle {
+                font-size: 0.7em;
+                margin-bottom: 8px;
+            }
+
+            .cover-title {
+                font-size: 1.05em;
+                line-height: 1.2;
+            }
+
+            .cover-logo {
+                height: 50px;
+            }
+
+            .comparison-item span {
+                font-size: 0.75em !important;
+            }
+
+            .timeline-circle {
+                width: 40px;
+                height: 40px;
+                font-size: 0.9em;
+            }
+
+            .timeline-title {
+                font-size: 0.8em;
+            }
+
+            .timeline-description {
+                font-size: 0.7em;
+            }
+
+            .lista-items {
+                font-size: 0.7em !important;
+                padding-left: 12px;
+            }
+
+            #btn-prev, #btn-next {
+                width: 28px;
+                height: 28px;
+                font-size: 12px;
+            }
+
+            #slide-counter-display {
+                font-size: 0.65em;
+                padding: 3px 5px;
+            }
+
+            /* Cover flex layout - stack images */
+            [style*="display:flex;align-items:center;justify-content:center;gap:30px"] {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            [style*="height:120px"] {
+                height: 80px !important;
+            }
+        }
+
+        @media print {
+            html, body {
+                margin: 0;
+                padding: 0;
+                height: auto;
+                background: white;
+                overflow: auto;
+            }
+
+            .slide {
+                display: flex !important;
+                page-break-after: always;
+                height: 100vh;
+                margin: 0;
+                padding: 0;
+                opacity: 1 !important;
+            }
+
+            #slide-counter-display,
+            #btn-prev,
+            #btn-next {
+                display: none !important;
+            }
+
+            .slide-content {
+                page-break-inside: avoid;
+            }
+
+            table {
+                page-break-inside: avoid;
+            }
+
+            .feature-module {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="documento">
+
+    <!-- ====================================================
+         SLIDE 1: PORTADA
+         ==================================================== -->
+    <div class="slide cover-slide">
+        <!-- SVG Decorativos -->
+        <svg class="hero-decor" style="top:35px;left:50px;width:55px;height:55px;" viewBox="0 0 100 100"><path d="M50 0 L62 38 L100 50 L62 62 L50 100 L38 62 L0 50 L38 38 Z" fill="rgba(255,255,255,0.18)"/></svg>
+        <svg class="hero-decor" style="top:80px;right:130px;width:32px;height:32px;" viewBox="0 0 100 100"><path d="M50 0 L62 38 L100 50 L62 62 L50 100 L38 62 L0 50 L38 38 Z" fill="rgba(238,123,28,0.25)"/></svg>
+        <svg class="hero-decor" style="bottom:130px;left:110px;width:22px;height:22px;" viewBox="0 0 100 100"><path d="M50 0 L62 38 L100 50 L62 62 L50 100 L38 62 L0 50 L38 38 Z" fill="rgba(255,255,255,0.14)"/></svg>
+        <svg class="hero-decor" style="bottom:70px;right:220px;width:42px;height:42px;" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="none" stroke="rgba(238,123,28,0.18)" stroke-width="3"/></svg>
+        <svg class="hero-decor" style="top:200px;right:60px;width:70px;height:70px;" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="2"/></svg>
+
+        <div class="cover-content">
+            <img src="suenolar.png" alt="Sueñolar" class="cover-logo">
+
+            <div style="margin-bottom:16px;">
+                <span class="amber-badge">Bienvenido al equipo</span>
+            </div>
+
+            <h1 class="cover-title">Onboarding de Proyecto<br>Sueñolar + Porta</h1>
+
+            <p class="cover-subtitle">
+                Conoce el equipo, los objetivos y el estado actual de tu implementación<br>
+                Porta Solutions | 2026
+            </p>
+
+            <p style="font-size:0.9em;color:rgba(255,255,255,0.75);margin-top:32px;">Tu proyecto, nuestro compromiso — porta.</p>
+        </div>
+    </div>
+    <!-- ====================================================
+         SLIDE 2: PRESENTACIÓN DE CX
+         ==================================================== -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="slide-header-left">
+                <img src="logotipo_blanco.png" alt="Porta" class="porta-logo-small" style="height:40px;padding:0;background:transparent;width:auto;">
+                <span class="slide-header-text">Sueñolar | Responsable de Experiencia de Cliente</span>
+            </div>
+            <span class="slide-number">03</span>
+        </div>
+
+        <div class="slide-content" style="padding:20px 55px;">
+            <h2 class="slide-title" style="margin-bottom:12px;">Luz Ohinggins: Tu CX Manager</h2>
+            <p class="slide-subtitle">Punto de contacto estratégico para el proyecto Sueñolar</p>
+
+            <div style="display:flex;gap:26px;align-items:flex-start;flex:1;">
+                <!-- FOTO Y DATOS -->
+                <div style="flex:0 0 220px;display:flex;flex-direction:column;align-items:center;gap:14px;">
+                    <div style="width:185px;height:185px;border-radius:50%;overflow:hidden;border:5px solid var(--lila-principal);box-shadow:0 8px 30px rgba(82,40,131,0.25);background:#f0f0f0;display:flex;align-items:center;justify-content:center;font-size:0.75em;color:#999;">
+                        <img src="Luz.png" alt="Luz Ohinggins" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+                    </div>
+                    <div style="text-align:center;width:100%;">
+                        <h3 style="color:var(--lila-principal);font-size:1.15em;font-weight:800;margin-bottom:6px;">Luz Ohinggins</h3>
+                        <div style="background:linear-gradient(135deg,var(--lila-principal),var(--purpura-medio));color:white;padding:4px 12px;border-radius:20px;font-size:0.68em;font-weight:600;display:inline-block;-webkit-print-color-adjust:exact;print-color-adjust:exact;line-height:1.3;">Responsable CX<br>del Proyecto</div>
+                    </div>
+                    <div style="background:rgba(82,40,131,0.05);border-radius:10px;padding:9px 12px;width:100%;text-align:center;border:1px solid rgba(82,40,131,0.1);">
+                        <div style="font-size:0.62em;color:var(--texto-secundario);line-height:1.5;">
+                            <div style="color:var(--lila-principal);font-weight:700;margin-bottom:3px;">Client Success<br>Manager</div>
+                            <div>Porta — Desarrollo<br>Sueñolar</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CONTENIDO -->
+                <div style="flex:1;display:flex;flex-direction:column;gap:12px;justify-content:center;">
+                    <!-- PÁRRAFO MACRO -->
+                    <div style="background:linear-gradient(135deg,rgba(82,40,131,0.06),rgba(238,123,28,0.04));border-radius:12px;padding:13px 16px;border:2px solid rgba(82,40,131,0.1);">
+                        <p style="font-size:0.8em;color:var(--texto-principal);line-height:1.65;margin:0;">
+                            Luz es tu punto de contacto estratégico dentro del equipo de Porta. <strong style="color:var(--lila-principal);">Tiene una mirada completa sobre tu proyecto Sueñolar:</strong> conoce todo lo contratado, lo que funciona, lo que podría mejorarse y las oportunidades para explorar juntos.
+                        </p>
+                    </div>
+
+                    <!-- DOS COLUMNAS -->
+                    <div class="two-columns" style="gap:20px;flex:1;margin-top:1px;">
+                        <!-- LO QUE HACE LIGHT -->
+                        <div style="background:white;border:2px solid rgba(82,40,131,0.1);border-radius:10px;padding:24px 26px;border-top:3px solid var(--lila-principal);">
+                            <h4 style="font-size:1.22em;color:var(--lila-principal);margin-bottom:18px;font-weight:700;">✨ Sus responsabilidades</h4>
+                            <div class="comparison-item"><div class="check purple">✓</div><span style="font-size:1.22em;">Contacto periódico sobre el estado del proyecto</span></div>
+                            <div class="comparison-item"><div class="check purple">✓</div><span style="font-size:1.22em;">Coordinación entre tu equipo y Porta</span></div>
+                            <div class="comparison-item"><div class="check purple">✓</div><span style="font-size:1.22em;">Detección temprana de problemas</span></div>
+                            <div class="comparison-item"><div class="check purple">✓</div><span style="font-size:1.22em;">Comunicación sobre novedades y cambios</span></div>
+                            <div class="comparison-item"><div class="check purple">✓</div><span style="font-size:1.22em;">Garantía de entregas en tiempos acordados</span></div>
+                        </div>
+
+                        <!-- VALOR AGREGADO -->
+                        <div style="background:white;border:2px solid rgba(238,123,28,0.12);border-radius:10px;padding:24px 26px;border-top:3px solid var(--naranja-base);">
+                            <h4 style="font-size:1.22em;color:var(--naranja-base);margin-bottom:18px;font-weight:700;">📈 Valor para tu equipo</h4>
+                            <div class="comparison-item"><div class="check orange" style="background:rgba(238,123,28,0.1);color:var(--naranja-base);font-size:0.8em;">▸</div><span style="font-size:1.22em;"><strong>Un referente único</strong>: no múltiples contactos</span></div>
+                            <div class="comparison-item"><div class="check orange" style="background:rgba(238,123,28,0.1);color:var(--naranja-base);font-size:0.8em;">▸</div><span style="font-size:1.22em;"><strong>Visión integral</strong>: conoce todo el proyecto</span></div>
+                            <div class="comparison-item"><div class="check orange" style="background:rgba(238,123,28,0.1);color:var(--naranja-base);font-size:0.8em;">▸</div><span style="font-size:1.22em;"><strong>Proactiva</strong>: anticipa problemas</span></div>
+                            <div class="comparison-item"><div class="check orange" style="background:rgba(238,123,28,0.1);color:var(--naranja-base);font-size:0.8em;">▸</div><span style="font-size:1.22em;"><strong>Coordinadora</strong>: sincroniza equipos</span></div>
+                        </div>
+                    </div>
+
+                    <!-- HIGHLIGHT -->
+                    <div class="highlight-box" style="padding:12px 16px;margin-top:8px;text-align:center;">
+                        <p style="font-size:0.78em;margin:0;line-height:1.6;"><strong>Luz es tu garantía:</strong> que tu proyecto avance con claridad, precisión y el compromiso de Porta atrás.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-footer">Sueñolar | Responsible de CX | porta.com.py</div>
+    </div>
+    <div class="slide">
+        <div class="slide-header">
+            <div class="slide-header-left">
+                <img src="logotipo_blanco.png" alt="Porta" class="porta-logo-small" style="height:40px;padding:0;background:transparent;width:auto;">
+                <span class="slide-header-text">Porta | Límites Claros del Rol</span>
+            </div>
+            <span class="slide-number">03</span>
+        </div>
+
+        <div class="slide-content" style="display:flex;flex-direction:column;justify-content:center;align-items:center;padding:40px 55px;">
+            <h2 class="slide-title">Alcance de mi rol</h2>
+
+            <div class="highlight-box" style="padding:40px 45px;margin-top:20px;text-align:center;flex:1;display:flex;flex-direction:column;justify-content:center;max-width:700px;">
+                <!-- Forzar texto en blanco dentro del recuadro para mejor contraste sobre el degradado -->
+                <h3 style="font-size:1.1em;margin-bottom:20px;text-align:center;color:rgba(255,255,255,0.98);font-weight:700;">Límites claros de mi rol</h3>
+                <p style="font-size:0.95em;margin-bottom:16px;line-height:1.8;color:rgba(255,255,255,0.95);">
+                    No reemplazo tus equipos internos ni tomo decisiones que corresponden a tu organización. No ejecuto tácticas operativas diarias (eso lo hacen los especialistas de Porta), ni tengo poder de decisión presupuestaria en Porta.
+                </p>
+                <p style="font-size:0.95em;line-height:1.8;margin:0;color:rgba(255,255,255,0.95);">
+                    <strong style="color:rgba(255,255,255,1);font-size:1.02em;">Soy tu nexo estratégico y tu defensor dentro de Porta</strong>, asegurando que tu voz sea escuchada y tus necesidades sean priorizadas. Trabajamos juntos para que tus objetivos de CX se conviertan en realidad, respetando estructuras, procesos y presupuestos establecidos.
+                </p>
+            </div>
+        </div>
+
+        <div class="slide-footer">porta. | Claridad del Rol | porta.com.py</div>
+    </div>
+
+    <!-- ====================================================
+         SLIDE 3: PROJECT MANAGER - ANALIA RIVAROLA
+         ==================================================== -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="slide-header-left">
+                <img src="logotipo_blanco.png" alt="Porta" class="porta-logo-small" style="height:40px;padding:0;background:transparent;width:auto;">
+                <span class="slide-header-text">Sueñolar | Project Manager</span>
+            </div>
+            <span class="slide-number">04</span>
+        </div>
+
+        <div class="slide-content" style="padding:20px 55px;">
+            <h2 class="slide-title" style="margin-bottom:12px;">Analia Rivarola: Tu Project Manager</h2>
+            <p class="slide-subtitle">Coordinación, seguimiento y ejecución del proyecto</p>
+
+            <div style="display:flex;gap:26px;align-items:flex-start;flex:1;">
+                <!-- FOTO Y DATOS -->
+                <div style="flex:0 0 220px;display:flex;flex-direction:column;align-items:center;gap:14px;">
+                    <div style="width:185px;height:185px;border-radius:50%;overflow:hidden;border:5px solid var(--naranja-base);box-shadow:0 8px 30px rgba(238,123,28,0.25);background:#f0f0f0;display:flex;align-items:center;justify-content:center;font-size:0.75em;color:#999;">
+                        <img src="perfil analia.png" alt="Analia Rivarola" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+                    </div>
+                    <div style="text-align:center;width:100%;">
+                        <h3 style="color:var(--naranja-base);font-size:1.15em;font-weight:800;margin-bottom:6px;">Analia Rivarola</h3>
+                        <div style="background:linear-gradient(135deg,var(--naranja-base),#ff9040);color:white;padding:4px 12px;border-radius:20px;font-size:0.68em;font-weight:600;display:inline-block;-webkit-print-color-adjust:exact;print-color-adjust:exact;line-height:1.3;">Project Manager<br>Sueñolar</div>
+                    </div>
+                    <div style="background:rgba(238,123,28,0.05);border-radius:10px;padding:9px 12px;width:100%;text-align:center;border:1px solid rgba(238,123,28,0.1);">
+                        <div style="font-size:0.62em;color:var(--texto-secundario);line-height:1.5;">
+                            <div style="color:var(--naranja-base);font-weight:700;margin-bottom:3px;">Gestión de<br>Proyectos</div>
+                            <div>Porta — Coordinación<br>de Desarrollo</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CONTENIDO -->
+                <div style="flex:1;display:flex;flex-direction:column;gap:12px;justify-content:center;">
+                    <!-- PÁRRAFO MACRO -->
+                    <div style="background:linear-gradient(135deg,rgba(238,123,28,0.08),rgba(82,40,131,0.04));border-radius:12px;padding:13px 16px;border:2px solid rgba(238,123,28,0.12);">
+                        <p style="font-size:0.8em;color:var(--texto-principal);line-height:1.65;margin:0;">
+                            Analia es la columna vertebral operativa del proyecto. <strong style="color:var(--naranja-base);">Coordina, sincroniza y asegura que todo avance dentro de los plazos y estándares de calidad establecidos.</strong> Su rol es garantizar que las decisiones se ejecuten y que tengas claridad en cada paso.
+                        </p>
+                    </div>
+
+                    <!-- DOS COLUMNAS -->
+                    <div class="two-columns" style="gap:20px;flex:1;margin-top:1px;">
+                        <!-- RESPONSABILIDADES -->
+                        <div style="background:white;border:2px solid rgba(238,123,28,0.15);border-radius:10px;padding:24px 26px;border-top:3px solid var(--naranja-base);">
+                            <h4 style="font-size:1.22em;color:var(--naranja-base);margin-bottom:18px;font-weight:700;">📋 Responsabilidades</h4>
+                            <div class="comparison-item"><div class="check orange" style="background:rgba(238,123,28,0.12);color:var(--naranja-base);">✓</div><span style="font-size:1.22em;">Coordinar solicitudes del cliente</span></div>
+                            <div class="comparison-item"><div class="check orange" style="background:rgba(238,123,28,0.12);color:var(--naranja-base);">✓</div><span style="font-size:1.22em;">Actuar como nexo entre equipos</span></div>
+                            <div class="comparison-item"><div class="check orange" style="background:rgba(238,123,28,0.12);color:var(--naranja-base);">✓</div><span style="font-size:1.22em;">Asignar tareas al equipo</span></div>
+                            <div class="comparison-item"><div class="check orange" style="background:rgba(238,123,28,0.12);color:var(--naranja-base);">✓</div><span style="font-size:1.22em;">Hacer seguimiento del progreso</span></div>
+                            <div class="comparison-item"><div class="check orange" style="background:rgba(238,123,28,0.12);color:var(--naranja-base);">✓</div><span style="font-size:1.22em;">Comunicar avances y gestionar expectativas</span></div>
+                        </div>
+
+                        <!-- GARANTÍA -->
+                        <div style="background:white;border:2px solid rgba(238,123,28,0.15);border-radius:10px;padding:24px 26px;border-top:3px solid var(--naranja-base);">
+                            <h4 style="font-size:1.22em;color:var(--naranja-base);margin-bottom:18px;font-weight:700;">🎯 Su garantía</h4>
+                            <div class="comparison-item"><div class="check orange" style="background:rgba(238,123,28,0.12);color:var(--naranja-base);">▸</div><span style="font-size:1.22em;"><strong>Precisión</strong>: cada tarea, bien hecha</span></div>
+                            <div class="comparison-item"><div class="check orange" style="background:rgba(238,123,28,0.12);color:var(--naranja-base);">▸</div><span style="font-size:1.22em;"><strong>Plazos</strong>: entregas dentro de tiempo</span></div>
+                            <div class="comparison-item"><div class="check orange" style="background:rgba(238,123,28,0.12);color:var(--naranja-base);">▸</div><span style="font-size:1.22em;"><strong>Transparencia</strong>: claridad total</span></div>
+                            <div class="comparison-item"><div class="check orange" style="background:rgba(238,123,28,0.12);color:var(--naranja-base);">▸</div><span style="font-size:1.22em;"><strong>Coordinación</strong>: equipos alineados</span></div>
+                            <div class="comparison-item"><div class="check orange" style="background:rgba(238,123,28,0.12);color:var(--naranja-base);">▸</div><span style="font-size:1.22em;"><strong>Calidad</strong>: estándares cumplidos</span></div>
+                        </div>
+                    </div>
+
+                    <!-- HIGHLIGHT -->
+                    <div class="highlight-box" style="padding:12px 16px;margin-top:8px;text-align:center;background:linear-gradient(135deg,var(--naranja-base),#ff9040);">
+                        <p style="font-size:0.78em;margin:0;line-height:1.6;"><strong>Analia es tu garantía:</strong> proyecto bajo control, con precisión y en el tiempo acordado.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-footer">Sueñolar | Project Manager | porta.com.py</div>
+    </div>
+
+    <!-- ====================================================
+         SLIDE 4: DREAM TEAM
+         ==================================================== -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="slide-header-left">
+                <img src="logotipo_blanco.png" alt="Porta" class="porta-logo-small" style="height:40px;padding:0;background:transparent;width:auto;">
+                <span class="slide-header-text">Sueñolar | Dream Team</span>
+            </div>
+            <span class="slide-number">05</span>
+        </div>
+
+        <div class="slide-content">
+            <h2 class="slide-title">Dream team</h2>
+            <p class="slide-subtitle">Profesionales dedicados a tu éxito</p>
+
+            <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:20px;flex:1;margin-top:20px;padding:0 10px;">
+                <!-- SAMUEL GIUBI -->
+                <div style="display:flex;flex-direction:column;align-items:center;gap:12px;background:rgba(82,40,131,0.05);border-radius:12px;padding:18px;border:2px solid rgba(82,40,131,0.12);">
+                    <div style="width:100px;height:100px;border-radius:50%;overflow:hidden;border:3px solid var(--lila-principal);box-shadow:0 4px 12px rgba(82,40,131,0.15);display:flex;align-items:center;justify-content:center;">
+                        <div style="width:100%;height:100%;background:linear-gradient(135deg,var(--lila-principal),var(--purpura-medio));display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:1.4em;">SG</div>
+                    </div>
+                    <div style="text-align:center;width:100%;">
+                        <h4 style="color:var(--lila-principal);font-size:0.95em;font-weight:800;margin:6px 0;line-height:1.2;">Samuel Giubi</h4>
+                        <div style="background:var(--lila-principal);color:white;padding:4px 10px;border-radius:16px;font-size:0.65em;font-weight:600;display:inline-block;white-space:nowrap;">Director General</div>
+                    </div>
+                </div>
+
+                <!-- GISELLE GINES -->
+                <div style="display:flex;flex-direction:column;align-items:center;gap:12px;background:rgba(238,123,28,0.05);border-radius:12px;padding:18px;border:2px solid rgba(238,123,28,0.12);">
+                    <div style="width:100px;height:100px;border-radius:50%;overflow:hidden;border:3px solid var(--naranja-base);box-shadow:0 4px 12px rgba(238,123,28,0.15);display:flex;align-items:center;justify-content:center;">
+                        <div style="width:100%;height:100%;background:linear-gradient(135deg,var(--naranja-base),#ff9040);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:1.4em;">GG</div>
+                    </div>
+                    <div style="text-align:center;width:100%;">
+                        <h4 style="color:var(--naranja-base);font-size:0.95em;font-weight:800;margin:6px 0;line-height:1.2;">Giselle Ginés</h4>
+                        <div style="background:var(--naranja-base);color:white;padding:4px 10px;border-radius:16px;font-size:0.65em;font-weight:600;display:inline-block;white-space:nowrap;">Directora de Proyectos</div>
+                    </div>
+                </div>
+
+                <!-- GIOVANNI BOCCIA -->
+                <div style="display:flex;flex-direction:column;align-items:center;gap:12px;background:rgba(82,40,131,0.05);border-radius:12px;padding:18px;border:2px solid rgba(82,40,131,0.12);">
+                    <div style="width:100px;height:100px;border-radius:50%;overflow:hidden;border:3px solid var(--lila-principal);box-shadow:0 4px 12px rgba(82,40,131,0.15);display:flex;align-items:center;justify-content:center;">
+                        <div style="width:100%;height:100%;background:linear-gradient(135deg,var(--lila-principal),var(--purpura-medio));display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:1.4em;">GB</div>
+                    </div>
+                    <div style="text-align:center;width:100%;">
+                        <h4 style="color:var(--lila-principal);font-size:0.95em;font-weight:800;margin:6px 0;line-height:1.2;">Giovanni Boccia</h4>
+                        <div style="background:var(--lila-principal);color:white;padding:4px 10px;border-radius:16px;font-size:0.65em;font-weight:600;display:inline-block;white-space:nowrap;">Director Comercial</div>
+                    </div>
+                </div>
+
+                <!-- AYELÉN GINÉS -->
+                <div style="display:flex;flex-direction:column;align-items:center;gap:12px;background:rgba(238,123,28,0.05);border-radius:12px;padding:18px;border:2px solid rgba(238,123,28,0.12);">
+                    <div style="width:100px;height:100px;border-radius:50%;overflow:hidden;border:3px solid var(--naranja-base);box-shadow:0 4px 12px rgba(238,123,28,0.15);display:flex;align-items:center;justify-content:center;">
+                        <div style="width:100%;height:100%;background:linear-gradient(135deg,var(--naranja-base),#ff9040);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:1.4em;">AG</div>
+                    </div>
+                    <div style="text-align:center;width:100%;">
+                        <h4 style="color:var(--naranja-base);font-size:0.95em;font-weight:800;margin:6px 0;line-height:1.2;">Ayelén Ginés</h4>
+                        <div style="background:var(--naranja-base);color:white;padding:4px 10px;border-radius:16px;font-size:0.65em;font-weight:600;display:inline-block;white-space:nowrap;">Coordinadora General</div>
+                    </div>
+                </div>
+
+                <!-- ANDREA ESPÍNOLA -->
+                <div style="display:flex;flex-direction:column;align-items:center;gap:12px;background:rgba(82,40,131,0.05);border-radius:12px;padding:18px;border:2px solid rgba(82,40,131,0.12);">
+                    <div style="width:100px;height:100px;border-radius:50%;overflow:hidden;border:3px solid var(--lila-principal);box-shadow:0 4px 12px rgba(82,40,131,0.15);display:flex;align-items:center;justify-content:center;">
+                        <div style="width:100%;height:100%;background:linear-gradient(135deg,var(--lila-principal),var(--purpura-medio));display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:1.4em;">AE</div>
+                    </div>
+                    <div style="text-align:center;width:100%;">
+                        <h4 style="color:var(--lila-principal);font-size:0.95em;font-weight:800;margin:6px 0;line-height:1.2;">Andrea Espínola</h4>
+                        <div style="background:var(--lila-principal);color:white;padding:4px 10px;border-radius:16px;font-size:0.65em;font-weight:600;display:inline-block;white-space:nowrap;">Líder de Gestión y Proyectos Web</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-footer">Sueñolar | Dream Team | porta.com.py</div>
+    </div>
+
+    <!-- ====================================================
+         SLIDE 5: AGENDA DE CONSULTAS
+         ==================================================== -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="slide-header-left">
+                <img src="logotipo_blanco.png" alt="Porta" class="porta-logo-small" style="height:40px;padding:0;background:transparent;width:auto;">
+                <span class="slide-header-text">Sueñolar | Agenda de Consultas</span>
+            </div>
+            <span class="slide-number">06</span>
+        </div>
+
+        <div class="slide-content">
+            <h2 class="slide-title">Agenda de Hoy</h2>
+            <p class="slide-subtitle">Temas a revisar en esta reunión de onboarding</p>
+
+            <ul class="lista-items" style="flex:1;">
+                <li>Capacitación sobre el uso del panel de administración</li>
+                <li>Beneficios y funcionalidades disponibles actualmente en la web</li>
+                <li>Funcionalidades disponibles que aún no se están utilizando o que podrían explorarse</li>
+                <li>Integraciones actuales entre Sueñolar y Porta</li>
+                <li>Automatizaciones de procesos existentes y cron jobs</li>
+                <li>Alcance del contrato y del presupuesto actual</li>
+                <li>Qué funcionalidades o desarrollos se consideran adicionales y tienen costo</li>
+                <li>Cómo canalizar consultas o reclamos con el equipo</li>
+            </ul>
+        </div>
+
+        <div class="slide-footer">Sueñolar | Agenda de Consultas | porta.com.py</div>
+    </div>
+
+    <!-- ====================================================
+         SLIDE 6: AUTOMATIZACIONES Y CRON JOBS
+         ==================================================== -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="slide-header-left">
+                <img src="logotipo_blanco.png" alt="Porta" class="porta-logo-small" style="height:40px;padding:0;background:transparent;width:auto;">
+                <span class="slide-header-text">Sueñolar | Automatizaciones Actuales</span>
+            </div>
+            <span class="slide-number">07</span>
+        </div>
+
+        <div class="slide-content">
+            <h2 class="slide-title">Automatizaciones Actuales</h2>
+            <p class="slide-subtitle">Procesos que se ejecutan automáticamente en tu plataforma</p>
+
+            <div class="tabla-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Proceso</th>
+                            <th>Descripción</th>
+                            <th>Frecuencia</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Nutrición de productos</strong></td>
+                            <td>Actualización automática del catálogo desde ERP</td>
+                            <td>Diariamente a las 1:00 AM</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Nutrición de stock</strong></td>
+                            <td>Sincronización de inventario disponible</td>
+                            <td>Cada 2 horas</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Nutrición de precios</strong></td>
+                            <td>Actualización de lista de precios desde ERP</td>
+                            <td>Cada 2 horas</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Inhabilitación de popups</strong></td>
+                            <td>Desactiva promociones con fecha de fin vencida</td>
+                            <td>Diariamente a las 23:50</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Correos de compra online</strong></td>
+                            <td>Envía confirmaciones a clientes con pago online</td>
+                            <td>Cada 3 minutos</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="highlight-box" style="padding:18px 24px;margin-top:28px;text-align:center;">
+                <p style="font-size:0.82em;margin:0;line-height:1.6;"><strong>Beneficio:</strong> Datos actualizados sin intervención manual, garantizando que tu plataforma siempre muestre información correcta a tus clientes.</p>
+            </div>
+        </div>
+
+        <div class="slide-footer">Sueñolar | Automatizaciones de Procesos | porta.com.py</div>
+    </div>
+
+    <!-- ====================================================
+         SLIDE 7: STATUS ACTUAL DEL PROYECTO
+         ==================================================== -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="slide-header-left">
+                <img src="logotipo_blanco.png" alt="Porta" class="porta-logo-small" style="height:40px;padding:0;background:transparent;width:auto;">
+                <span class="slide-header-text">Sueñolar | Status del Proyecto</span>
+            </div>
+            <span class="slide-number">08</span>
+        </div>
+
+        <div class="slide-content">
+            <h2 class="slide-title">Status Actual: Segunda Etapa</h2>
+            <p class="slide-subtitle">Trabajos pendientes, integraciones principales y estado del desarrollo</p>
+
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;flex:1;">
+                <!-- TRABAJOS PENDIENTES -->
+                <div style="background: rgba(82,40,131,0.05); padding: 20px; border-radius: 12px; border-left: 4px solid var(--lila-principal); border: 2px solid rgba(82,40,131,0.12);">
+                    <h4 style="color:var(--lila-principal); margin-bottom: 14px; font-size: 1.0em; font-weight: 700;">📋 Trabajos Pendientes del Sistema</h4>
+                    <ul style="margin:0;padding-left:20px;font-size:0.88em;color:var(--texto-principal);">
+                        <li style="margin-bottom:10px;"><strong>Escritura de pedidos</strong> - Integración para creación de órdenes en ERP</li>
+                        <li><strong>Pruebas y ajustes</strong> - QA y validaciones según requerimientos</li>
+                    </ul>
+                </div>
+
+                <!-- INTEGRACIONES PRINCIPALES -->
+                <div style="background: rgba(238,123,28,0.05); padding: 20px; border-radius: 12px; border-left: 4px solid var(--naranja-base); border: 2px solid rgba(238,123,28,0.12);">
+                    <h4 style="color:var(--naranja-base); margin-bottom: 14px; font-size: 1.0em; font-weight: 700;">🔗 Integraciones Pendientes</h4>
+                    <ul style="margin:0;padding-left:20px;font-size:0.88em;color:var(--texto-principal);">
+                        <li style="margin-bottom:10px;"><strong>Thinkchat</strong> - WhatsApp para envío de información de pedidos + Nuevas soluciones: Asistente de Ventas IA, Servicio CRM</li>
+                        <li><strong>Salesforce</strong> - En pausa (desarrollo completo, aguardando definiciones del cliente)</li>
+                    </ul>
+                </div>
+
+                <!-- AJUSTES FINALES -->
+                <div style="background: rgba(82,40,131,0.05); padding: 20px; border-radius: 12px; border-left: 4px solid var(--lila-principal); border: 2px solid rgba(82,40,131,0.12);">
+                    <h4 style="color:var(--lila-principal); margin-bottom: 14px; font-size: 1.0em; font-weight: 700;">✅ Ajustes Finales</h4>
+                    <ul style="margin:0;padding-left:20px;font-size:0.88em;color:var(--texto-principal);">
+                        <li style="margin-bottom:10px;"><strong>Puesta en producción</strong> - Integraciones finales en ambiente vivo</li>
+                        <li><strong>Post-producción</strong> - 30 días hábiles de ajustes y soporte</li>
+                    </ul>
+                </div>
+
+                <!-- MÓDULOS EN DESARROLLO -->
+                <div style="background: rgba(238,123,28,0.05); padding: 20px; border-radius: 12px; border-left: 4px solid var(--naranja-base); border: 2px solid rgba(238,123,28,0.12);">
+                    <h4 style="color:var(--naranja-base); margin-bottom: 14px; font-size: 1.0em; font-weight: 700;">⏸️ En Pausa</h4>
+                    <ul style="margin:0;padding-left:20px;font-size:0.88em;color:var(--texto-principal);">
+                        <li><strong>Conectividad ERP</strong> - Alta prioridad (se cerró reunión, pendiente definiciones técnicas finales)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-footer">Sueñolar | Status Segunda Etapa | porta.com.py</div>
+    </div>
+                    margin-bottom: 10px;
+    <!-- ====================================================
+         SLIDE 8: MÓDULOS CONTEMPLADOS
+         ==================================================== -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="slide-header-left">
+                <img src="logotipo_blanco.png" alt="Porta" class="porta-logo-small" style="height:40px;padding:0;background:transparent;width:auto;">
+                <span class="slide-header-text">Sueñolar | Módulos Disponibles</span>
+            </div>
+            <span class="slide-number">09</span>
+        </div>
+
+        <div class="slide-content">
+            <h2 class="slide-title">Módulos Contemplados del Proyecto</h2>
+            <p class="slide-subtitle">Funcionalidades adicionales para optimizar tu plataforma</p>
+
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;flex:1;">
+                <div class="feature-module">
+                    <h4>🔄 Conectividad ERP</h4>
+                    <p>Lectura de clientes y escritura de pedidos (pausado - reunión realizada)</p>
+                </div>
+                <div class="feature-module">
+                    <h4>🤖 IA vía API</h4>
+                    <p>Requiere contratación de OpenAI por el cliente</p>
+                </div>
+                <div class="feature-module">
+                    <h4>📉 Descuentos Progresivos</h4>
+                    <p>Descuentos porcentuales según volumen</p>
+                </div>
+                <div class="feature-module">
+                    <h4>2️⃣ More for Less</h4>
+                    <p>Promociones tipo 2x1, 3x2, etc.</p>
+                </div>
+                <div class="feature-module">
+                    <h4>🚚 Delivery sin Costo</h4>
+                    <p>Módulo de envíos gratuitos</p>
+                </div>
+                <div class="feature-module">
+                    <h4>🎁 Regalos por Compra</h4>
+                    <p>Obsequios automáticos por monto</p>
+                </div>
+                <div class="feature-module">
+                    <h4>🎟️ Cupones Descuento</h4>
+                    <p>Códigos para cumpleaños y primer registro</p>
+                </div>
+                <div class="feature-module">
+                    <h4>💳 e-Gift Card</h4>
+                    <p>Tarjetas de regalo digitales</p>
+                </div>
+                <div class="feature-module">
+                    <h4>💰 Tigo Money</h4>
+                    <p>Integración de pago Tigo Money</p>
+                </div>
+                <div class="feature-module">
+                    <h4>💳 Pasarela Pagr (Ueno)</h4>
+                    <p>Solución de pago aplicada a Koala</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-footer">Sueñolar | Módulos Disponibles | porta.com.py</div>
+    </div>
+
+    <!-- ====================================================
+         SLIDE 9: SERVICIOS CONTRATADOS
+         ==================================================== -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="slide-header-left">
+                <img src="logotipo_blanco.png" alt="Porta" class="porta-logo-small" style="height:40px;padding:0;background:transparent;width:auto;">
+                <span class="slide-header-text">Sueñolar | Servicios Contratados</span>
+            </div>
+            <span class="slide-number">10</span>
+        </div>
+
+        <div class="slide-content">
+            <h2 class="slide-title">Servicios Contratados</h2>
+            <p class="slide-subtitle">Infraestructura y soporte que mantienen tu plataforma</p>
+
+            <div style="display:grid;grid-template-columns:1fr;gap:20px;flex:1;margin-top:20px;">
+                <div style="background:linear-gradient(135deg,rgba(82,40,131,0.08),rgba(238,123,28,0.06));border-radius:12px;padding:26px;border:2px solid rgba(82,40,131,0.12);">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+                        <h4 style="font-size:1.15em;color:var(--lila-principal);margin:0;font-weight:700;">🖥️ Hospedaje Web VPS Koala</h4>
+                        <span style="background:var(--naranja-base);color:white;padding:8px 18px;border-radius:20px;font-weight:700;font-size:0.85em;-webkit-print-color-adjust:exact;print-color-adjust:exact;">Gs. 660.000</span>
+                    </div>
+                    <p style="font-size:0.92em;color:var(--texto-principal);margin:0;line-height:1.5;">
+                        Servicio de hospedaje VPS con infraestructura dedicada que garantiza disponibilidad, seguridad y rendimiento óptimo de tu plataforma e-commerce. Incluye mantenimiento e infraestructura de soporte.
+                    </p>
+                </div>
+
+                <div style="background:linear-gradient(135deg,rgba(82,40,131,0.08),rgba(238,123,28,0.06));border-radius:12px;padding:26px;border:2px solid rgba(82,40,131,0.12);">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+                        <h4 style="font-size:1.15em;color:var(--lila-principal);margin:0;font-weight:700;">🔧 Mantenimiento Web - Paquete 20 horas</h4>
+                        <span style="background:var(--naranja-base);color:white;padding:8px 18px;border-radius:20px;font-weight:700;font-size:0.85em;-webkit-print-color-adjust:exact;print-color-adjust:exact;">Gs. 2.210.000</span>
+                    </div>
+                    <p style="font-size:0.92em;color:var(--texto-principal);margin:0;line-height:1.5;">
+                        Servicio mensual de 20 horas dedicadas a soporte técnico, actualizaciones de seguridad, optimizaciones de performance, corrección de bugs y mejoras generales de tu plataforma.
+                    </p>
+                </div>
+
+                <div class="highlight-box" style="padding:20px 24px;margin-top:12px;text-align:center;">
+                    <p style="font-size:0.85em;margin:0;line-height:1.6;"><strong>Inversión Total Mensual:</strong> Gs. 2.870.000 + servicios adicionales según necesidad</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-footer">Sueñolar | Servicios Contratados | porta.com.py</div>
+    </div>
+    <!-- ====================================================
+         SLIDE 10: CIERRE
+         ==================================================== -->
+    <div class="slide cover-slide" style="background: linear-gradient(135deg, var(--lila-principal) 0%, var(--purpura-medio) 100%) !important;">
+        <svg class="hero-decor" style="top:40px;left:60px;width:55px;height:55px;" viewBox="0 0 100 100"><path d="M50 0 L62 38 L100 50 L62 62 L50 100 L38 62 L0 50 L38 38 Z" fill="rgba(255,255,255,0.16)"/></svg>
+        <svg class="hero-decor" style="top:90px;right:140px;width:30px;height:30px;" viewBox="0 0 100 100"><path d="M50 0 L62 38 L100 50 L62 62 L50 100 L38 62 L0 50 L38 38 Z" fill="rgba(238,123,28,0.22)"/></svg>
+        <svg class="hero-decor" style="bottom:120px;left:120px;width:25px;height:25px;" viewBox="0 0 100 100"><path d="M50 0 L62 38 L100 50 L62 62 L50 100 L38 62 L0 50 L38 38 Z" fill="rgba(255,255,255,0.12)"/></svg>
+        <svg class="hero-decor" style="bottom:75px;right:230px;width:45px;height:45px;" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="none" stroke="rgba(238,123,28,0.14)" stroke-width="3"/></svg>
+        <svg class="hero-decor" style="top:220px;right:70px;width:75px;height:75px;" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="2"/></svg>
+
+        <div class="cover-content">
+            <img src="suenolar.png" alt="Sueñolar" class="cover-logo">
+
+            <div style="margin-bottom:16px;">
+                <span class="amber-badge">Vamos Juntos</span>
+            </div>
+
+            <h1 class="cover-title">Tu éxito es nuestro objetivo</h1>
+
+            <p class="cover-subtitle" style="max-width:700px;margin:0 auto 20px;font-size:0.95em;">
+                Un equipo dedicado, coordinado y comprometido<br>
+                con tu proyecto Sueñolar<br>
+                Porta Solutions | 2026
+            </p>
+
+            <!-- RESUMEN PILLS -->
+            <div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:18px 0;">
+                <div style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.22);padding:8px 18px;border-radius:30px;color:white;font-size:0.76em;font-weight:500;display:flex;align-items:center;gap:6px;">
+                    <span>✨</span> Equipo dedicado
+                </div>
+                <div style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.22);padding:8px 18px;border-radius:30px;color:white;font-size:0.76em;font-weight:500;display:flex;align-items:center;gap:6px;">
+                    <span>📊</span> Seguimiento continuo
+                </div>
+                <div style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.22);padding:8px 18px;border-radius:30px;color:white;font-size:0.76em;font-weight:500;display:flex;align-items:center;gap:6px;">
+                    <span>🎯</span> Compromiso total
+                </div>
+            </div>
+
+            <p style="font-size:0.85em;color:rgba(255,255,255,0.8);margin-top:20px;font-style:italic;">
+                Luz, Analia, Andrea y Ayelen están aquí para garantizar tu éxito
+            </p>
+
+            <p style="font-size:0.72em;color:rgba(255,255,255,0.5);margin-top:16px;">Tu proyecto, nuestro compromiso — porta.</p>
+        </div>
+    </div>
+
+</div><!-- /documento -->
+
+<script>
+    // ====================================================
+    // CONTROL DE PAGINACIÓN CON FLECHAS
+    // ====================================================
+
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('Presentacion CX cargada correctamente');
+
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+
+        // MOSTRAR/OCULTAR SLIDES
+        const showSlide = (index) => {
+            // Validar índice
+            if (index < 0) {
+                currentSlide = totalSlides - 1;
+            } else if (index >= totalSlides) {
+                currentSlide = 0;
+            } else {
+                currentSlide = index;
+            }
+
+            // Ocultar todas las slides
+            slides.forEach((slide, idx) => {
+                slide.style.display = idx === currentSlide ? 'flex' : 'none';
+                slide.style.opacity = '0';
+            });
+
+            // Mostrar slide actual con animación
+            const activeSlide = slides[currentSlide];
+            activeSlide.style.display = 'flex';
+            
+            setTimeout(() => {
+                activeSlide.style.opacity = '1';
+                activeSlide.style.transition = 'opacity 0.5s ease-in-out';
+            }, 10);
+
+            // Mostrar número de slide
+            updateSlideCounter();
+            console.log(`📄 Slide ${currentSlide + 1} de ${totalSlides}`);
+        };
+
+        // ACTUALIZAR CONTADOR DE SLIDES
+        const updateSlideCounter = () => {
+            const counterText = `${currentSlide + 1} / ${totalSlides}`;
+            let counter = document.getElementById('slide-counter-display');
+            
+            if (!counter) {
+                counter = document.createElement('div');
+                counter.id = 'slide-counter-display';
+                counter.style.cssText = `
+                    position: fixed;
+                    bottom: 20px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: rgba(82, 40, 131, 0.9);
+                    color: white;
+                    padding: 8px 16px;
+                    border-radius: 20px;
+                    font-size: 0.85em;
+                    font-weight: 600;
+                    z-index: 1000;
+                    letter-spacing: 0.5px;
+                `;
+                document.body.appendChild(counter);
+            }
+            
+            counter.textContent = counterText;
+        };
+
+        // NAVEGACIÓN CON TECLADO
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+                e.preventDefault();
+                showSlide(currentSlide + 1);
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                e.preventDefault();
+                showSlide(currentSlide - 1);
+            }
+        });
+
+        // PREVENIR SCROLL
+        const preventDefault = (e) => {
+            if (e.key === ' ' || e.key === 'ArrowUp' || e.key === 'ArrowDown' || 
+                e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+                e.preventDefault();
+            }
+        };
+
+        document.addEventListener('keydown', preventDefault);
+
+        // SCROLL WHEEL DESACTIVADO
+        let scrollEnabled = false;
+        document.addEventListener('wheel', (e) => {
+            if (!scrollEnabled) {
+                e.preventDefault();
+                
+                if (e.deltaY > 0) {
+                    showSlide(currentSlide + 1);
+                } else if (e.deltaY < 0) {
+                    showSlide(currentSlide - 1);
+                }
+            }
+        }, { passive: false });
+
+        // NAVEGACIÓN CON BOTONES (CREAR BOTONES VISUALES)
+        const createNavigationButtons = () => {
+            // Botón Anterior
+            const btnPrev = document.createElement('button');
+            btnPrev.innerHTML = '&#8249;';
+            btnPrev.id = 'btn-prev';
+            btnPrev.style.cssText = `
+                position: fixed;
+                left: 20px;
+                bottom: 20px;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                background: rgba(82, 40, 131, 0.85);
+                border: 2px solid rgba(255, 255, 255, 0.3);
+                color: white;
+                font-size: 2em;
+                cursor: pointer;
+                z-index: 1000;
+                transition: all 0.3s ease;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 4px 15px rgba(82, 40, 131, 0.3);
+            `;
+
+            // Botón Siguiente
+            const btnNext = document.createElement('button');
+            btnNext.innerHTML = '&#8250;';
+            btnNext.id = 'btn-next';
+            btnNext.style.cssText = `
+                position: fixed;
+                right: 20px;
+                bottom: 20px;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                background: rgba(238, 123, 28, 0.85);
+                border: 2px solid rgba(255, 255, 255, 0.3);
+                color: white;
+                font-size: 2em;
+                cursor: pointer;
+                z-index: 1000;
+                transition: all 0.3s ease;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 4px 15px rgba(238, 123, 28, 0.3);
+            `;
+
+            // Event listeners
+            btnPrev.addEventListener('click', () => showSlide(currentSlide - 1));
+            btnNext.addEventListener('click', () => showSlide(currentSlide + 1));
+
+            // Hover effects
+            btnPrev.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.1)';
+                this.style.background = 'rgba(82, 40, 131, 1)';
+                this.style.boxShadow = '0 6px 25px rgba(82, 40, 131, 0.5)';
+            });
+            btnPrev.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+                this.style.background = 'rgba(82, 40, 131, 0.85)';
+                this.style.boxShadow = '0 4px 15px rgba(82, 40, 131, 0.3)';
+            });
+
+            btnNext.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.1)';
+                this.style.background = 'rgba(238, 123, 28, 1)';
+                this.style.boxShadow = '0 6px 25px rgba(238, 123, 28, 0.5)';
+            });
+            btnNext.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+                this.style.background = 'rgba(238, 123, 28, 0.85)';
+                this.style.boxShadow = '0 4px 15px rgba(238, 123, 28, 0.3)';
+            });
+
+            document.body.appendChild(btnPrev);
+            document.body.appendChild(btnNext);
+        };
+
+        createNavigationButtons();
+
+        // EFECTO PARALLAX SUAVE EN SVG DECORATIVOS
+        const heroDecors = document.querySelectorAll('.hero-decor');
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) * 10 - 5;
+            const y = (e.clientY / window.innerHeight) * 10 - 5;
+            
+            heroDecors.forEach((decor, index) => {
+                const offset = (index + 1) * 0.5;
+                decor.style.transform = `translate(${x * offset}px, ${y * offset}px)`;
+            });
+        });
+
+        // EFECTO RIPPLE EN CLICK
+        const addRippleEffect = (element) => {
+            element.addEventListener('click', function(e) {
+                // No crear ripple en botones de navegación
+                if (e.target.id === 'btn-prev' || e.target.id === 'btn-next') return;
+
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    border-radius: 50%;
+                    background: rgba(238, 123, 28, 0.6);
+                    left: ${x}px;
+                    top: ${y}px;
+                    pointer-events: none;
+                    animation: rippleAnimation 0.6s ease-out;
+                `;
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                setTimeout(() => ripple.remove(), 600);
+            });
+        };
+
+        // Aplicar ripple a elementos clicables
+        document.querySelectorAll('.feature-module, .highlight-box, .two-columns > div').forEach(el => {
+            addRippleEffect(el);
+        });
+
+        // ANIMACIÓN RIPPLE EN CSS
+        const rippleStyle = document.createElement('style');
+        rippleStyle.textContent = `
+            @keyframes rippleAnimation {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(rippleStyle);
+
+        // EFECTO HOVER EN TÍTULOS
+        const titles = document.querySelectorAll('.slide-title');
+        titles.forEach(title => {
+            title.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateX(5px)';
+                this.style.transition = 'transform 0.3s ease';
+            });
+            title.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateX(0)';
+            });
+        });
+
+        // INICIALIZAR - MOSTRAR PRIMERA SLIDE
+        showSlide(0);
+
+        console.log('✨ Control de paginación activado - Usa las flechas o los botones');
+    });
+</script>
+
+</body>
+</html>
